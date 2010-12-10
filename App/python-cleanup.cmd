@@ -34,5 +34,6 @@ del %PYTHONHOME%\w9xpopen.exe
 del /S *.msi
 del /S *.pyc
 del /S *.pyo
+del /S *.bak
 
 pause

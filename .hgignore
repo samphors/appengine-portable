@@ -1,4 +1,13 @@
-App/google_appengine
-App/python-2.5.4
-App/python-2.5.4-gae
-Data/Temp
+syntax: glob
+*.bak
+*.exe
+*.7z
+*.rar
+*.zip
+#GoogleAppenginePythonPortable.exe
+#GAEPyPortable.exe
+
+syntax: regexp
+^App/google_appengine.*
+^App/python.*
+^Data/Temp.*
