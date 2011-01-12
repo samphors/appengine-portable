@@ -1,3 +1,5 @@
+@rem script to clean out the package, always run before packaging
+
 @echo off
 
 set PYTHONHOME="%~dp0\python-2.5.4-gae"

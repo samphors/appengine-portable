@@ -10,7 +10,7 @@
 @set PYTHONNOUSERSITE=1
 
 @cd %GAEPY%\App\google_appengine
-%PYTHONHOME%\python.exe appcfg.py rollback %APP_HOME%
+%PYTHONHOME%\python.exe appcfg.py update %APP_HOME%
 @cd %APP_HOME%
 
 pause
