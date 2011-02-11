@@ -4,10 +4,9 @@ syntax: glob
 *.7z
 *.rar
 *.zip
-#GoogleAppenginePythonPortable.exe
-#GAEPyPortable.exe
+GAEPyPortable.exe
 
 syntax: regexp
-^App/google_appengine.*
-^App/python.*
-^Data/Temp.*
+^App/google_appengine/.*
+^App/python-2.5.4-gae/.*
+^Data/Temp/.*
