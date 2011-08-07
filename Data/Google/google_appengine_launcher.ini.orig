@@ -1,7 +1,0 @@
-# Google App Engine Launcher preferences
-# http://code.google.com/appengine
-[preferences]
-python = ..\..\python-2.5.4-gae\pythonw.exe
-mainwindowrect = 100 150 580 280
-editor = ..\..\..\..\Notepad++Portable\Notepad++Portable.exe
-appengine = ..\..\google_appengine
