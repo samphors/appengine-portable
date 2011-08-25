@@ -1,0 +1,49 @@
+Google AppEngine Python Portable Standalone GUI Win32
+
+Google App Engine SDK for Python with Windows GUI launcher.
+Includes stripped-down and precompiled Python 2.5.4 with SSL.
+Standalone application, no dependencies on any other software.
+AppEngine_Python conforms to PortableApps.com specifications,
+and transparently updates its configuration files if run from
+removable media with changing drive letters between sessions.
+
+
+---
+
+Standard installation using the Portable Installer:
+
+Download and run the file AppEngine_Python_*_online.paf.exe instead.
+This archive will be downloaded automagically by the portable installer,
+or may be placed into the same directory for offline installation.
+
+----
+
+Manual Installation:
+ 
+Unpacking this archive creates the directory 'AppEngine_Python'.
+Open this folder and click on the portable executable 'AppEngine_Python.exe'.
+You may try out the demo guestbook and the SDK console without any further
+configuration, just add your own projects and go ahead.
+
+
+Changelog/Upgrade Notes:
+
+a)
+All *.py have been precompiled into *.pyc, and most of them removed.
+Please report any issues (such as *.py not found) via bug tracker.
+
+b)
+Application name has changed from 'GAEPyPortable' to 'AppEngine_Python'.
+Friendlier usability, but violates the PortableApps.com Specifications.
+Users of the portable installer may still choose any folder name.
+
+c)
+Development_Editor.exe serves as minimalistic, portablish IDE
+
+d)
+Testing different standalone archive format, including SFX.
+PortableApps.com Installer handles them all.
+
+e)
+For upgrades configuration files in Data\Google should be backed up.
+Use the portable installer instead to handle this case automatically.

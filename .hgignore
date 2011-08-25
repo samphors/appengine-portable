@@ -3,13 +3,17 @@ syntax: glob
 *.7z
 *.rar
 *.zip
+*.rdbms
+*.sqlite
 # *.exe
 # GAEPyPortable.exe
+# notepad2.ini
 Kopie von *
 
 syntax: regexp
 .*/bak/.*
 ^App/google_appengine/.*
 ^App/python-2.5.4-gae/.*
+^App/notepad2.ini
 ^Data/Temp/.*
 ^Data/debug.log

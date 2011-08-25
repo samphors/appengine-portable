@@ -1,0 +1,26 @@
+# Gogle App Engine Launcher Project File
+# http://code.google.com/appengine
+#
+# GAEPyPortable Notes:
+#
+# Relative paths keep the application fully portable and relocatable.
+# Current work directory:
+# App\google_appengine\launcher
+#
+# Any drive letter and path will be dynamically updated by the launcher.
+# Replacement rules configured in the file:
+# App\AppInfo\Launcher\AppEngine_Python.ini
+#
+# Datastore by default will be App\Data\Temp\dev_appserver.datastore
+# Temp will be erased on every start, multiple apps share same datastore
+#
+# Example flags for guestbook, relative, portable and relocatable:
+# flag0 = --use_sqlite
+# flag1 = --datastore_path=..\..\..\Data\Temp\guestbook.sqlite
+#
+[99]
+name = guestbook
+path = ..\demos\guestbook
+port = 8080
+flag0 = --use_sqlite
+flag1 = --datastore_path=..\..\..\Data\Temp\guestbook.sqlite

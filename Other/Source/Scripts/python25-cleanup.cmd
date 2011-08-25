@@ -1,13 +1,14 @@
-@rem script to clean out the package, always run before packaging
-
 @echo off
+@rem Clean out the package, intended to run before packaging
+@rem Script must be copied/moved into the application directory
+@rem GAEPyPortable: http://code.google.com/p/appengine-portable/
 
 set CWD=%~dp0
-set PYTHONHOME="%CWD%\python-2.5.4-gae"
+set PYTHONHOME="%CWD%App\python-2.5.4-gae"
 
 cd %PTHONHOME%
 
-@rem if exist _PRECOMPILE_.WARN
+@rem if exist _PRECOMPILED_.DIR
 
 rmdir /S /Q .\Doc
 del .\DLLs\_ctypes_test.pyd
@@ -44,7 +45,6 @@ del /S *.pyo
 del /S *.bak
 del /S *.tmp
 @rem del /S *.orig
-
 
 cd %CWD%
 

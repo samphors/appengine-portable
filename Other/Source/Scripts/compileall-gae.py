@@ -1,3 +1,8 @@
+# Script optimized for building of GAEPyPortable
+# Timestamp of compiled *.pyc will be set to source *.py
+# -u: unlink compiled *.py
+# -s: safe, dont unlink __init__.py
+
 """Module/script to "compile" all .py files to .pyc (or .pyo) file.
 
 When called as a script with arguments, this compiles the directories
@@ -19,7 +24,7 @@ import py_compile
 
 __all__ = ["compile_dir","compile_path"]
 
-def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0):
+def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0, safe=0):
     """Byte-compile all modules in the given directory tree.
 
     Arguments (only dir is required):
@@ -50,16 +55,17 @@ def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0):
             head, tail = name[:-3], name[-3:]
             # if tail == '.py':
             if tail == '.py':
-                cfile = fullname + (__debug__ and 'c' or 'o')
+                # cfile = fullname + (__debug__ and 'c' or 'o')
+                cfile = fullname + 'c'
                 ftime = os.stat(fullname)[stat.ST_MTIME]
-                try: ctime = os.stat(cfile)[stat.ST_MTIME]
-                except os.error: ctime = 0
-                # if (ctime > ftime) and not force:
-                #    continue
+                try:
+                    ctime = os.stat(cfile)[stat.ST_MTIME]
+                except os.error:
+                    ctime = 0
                 if (ctime < ftime) or force:
                     print 'Compile:', fullname
                     try:
-                        py_compile.compile(fullname, None, dfile)
+                        py_compile.compile(fullname, cfile, dfile)
                     except KeyboardInterrupt:
                         raise KeyboardInterrupt
                     except:
@@ -70,17 +76,20 @@ def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0):
                         print sys.exc_value
                         success = 0
                         continue
-                if unlnk:
+                    # set timestamp from sourcefile (ftime)
+                    os.utime(cfile, (ftime,ftime))
+                # safety: preserve __init__.py from deletion
+                if unlnk and ((not safe) or (name != '__init__.py')):
                     print 'Unlink:', fullname
                     os.unlink(fullname)
         elif maxlevels > 0 and \
              name != os.curdir and name != os.pardir and \
              os.path.isdir(fullname) and \
              not os.path.islink(fullname):
-            compile_dir(fullname, maxlevels - 1, dfile, force, unlnk)
+            compile_dir(fullname, maxlevels - 1, dfile, force, unlnk, safe)
     return success
 
-def compile_path(skip_curdir=1, maxlevels=0, force=0, unlnk=0):
+def compile_path(skip_curdir=1, maxlevels=0, force=0, unlnk=0, safe=0):
     """Byte-compile all module on sys.path.
 
     Arguments (all optional):
@@ -95,20 +104,21 @@ def compile_path(skip_curdir=1, maxlevels=0, force=0, unlnk=0):
         if (not dir or dir == os.curdir) and skip_curdir:
             print 'Skipping current directory'
         else:
-            success = success and compile_dir(dir, maxlevels, None, force, unlnk)
+            success = success and compile_dir(dir, maxlevels, None, force, unlnk, safe)
     return success
 
 def main():
     """Script main program."""
     import getopt
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'lfud:')
+        opts, args = getopt.getopt(sys.argv[1:], 'lfusd:')
     except getopt.error, msg:
         print msg
-        print "usage: compileall [-l] [-f] [-u] [-d destdir] [directory ...]"
-        print "-u: unlink source after compile"
+        print "usage: compileall [-l] [-f] [-u [-s]] [-d destdir] [directory ...]"
         print "-l: don't recurse down"
         print "-f: force rebuild even if timestamps are up-to-date"
+        print "-u: unlink source after compile"
+        print "-s: safe, dont unlink __init__.py"
         print "-d destdir: purported directory name for error messages"
         print "if no directory arguments, -l sys.path is assumed"
         sys.exit(2)
@@ -116,11 +126,13 @@ def main():
     ddir = None
     force = 0
     unlnk = 0
+    safe = 0
     for o, a in opts:
         if o == '-l': maxlevels = 0
         if o == '-d': ddir = a
         if o == '-f': force = 1
         if o == '-u': unlnk = 1
+        if o == '-s': safe = 1
     if ddir:
         if len(args) != 1:
             print "-d destdir require exactly one directory argument"
@@ -129,7 +141,7 @@ def main():
     try:
         if args:
             for dir in args:
-                success = success and compile_dir(dir, maxlevels, ddir, force, unlnk)
+                success = success and compile_dir(dir, maxlevels, ddir, force, unlnk, safe)
         else:
             success = compile_path()
     except KeyboardInterrupt:
