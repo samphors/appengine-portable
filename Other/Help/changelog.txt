@@ -1,0 +1,58 @@
+Changelog/Upgrade Notes:
+
+1.6.1:
+
+Simple upgrade, precompiled with py25 as usual
+
+1.6.0:
+
+Preparing for multiple versions of Python, running from
+within the same app.
+	- .\App\ oved into .\App\py25\
+	- .\Data\ moved into .\Data\py25\
+	- Launcher *.ini files adjusted
+
+Release still ships only with Python 2.5.4 precompiled.
+
+Bug: rdbms API not available because of issing MySQLdb library:
+	WARNING __init__.py:1309] The rdbms API is not available because
+	the MySQLdb library could not be loaded.
+
+SQLite db (as in the example guestbook) works as expected.
+
+Version for Python 2.7.2 will follow after some testing
+(tester for py27 are welcome and might spped up things)
+
+1.5.5:
+
+PIL (Python Image Library) fixed, requires some *.py to exist
+Icons for PortableApps.com Menu
+Precompiled: will work *only* with (included) Python version 2.5.4
+
+1.5.4:
+
+Application name changed from 'AppEngine_Python' to 'AppEngine_Python25'
+since Google will soon support also Python 2.7 with multithreading.
+This way both releases may coexist without confusion.
+Rename the directory (and the executables in the root) to whatever.
+
+New tools added in application root: (just remove them if not needed)
+Development_Editor.exe serves as minimalistic, portablish IDE
+Python25_Console.exe with environment set for appengine-portable
+Python25_Documentation.chm offline manual
+Windows_Console.exe with environment set for appengine-portable
+
+1.5.3:
+
+All *.py have been precompiled into *.pyc, and most of them removed.
+Please report any issues (such as *.py not found) via bug tracker.
+
+Application name has changed from 'GAEPyPortable' to 'AppEngine_Python'.
+Friendlier usability, but violates the PortableApps.com Specifications.
+Users of the portable installer may still choose any folder name.
+
+Testing different standalone archive format, including SFX.
+PortableApps.com Installer handles them all.
+
+For upgrades configuration files in Data\Google should be backed up.
+Use the portable installer instead to handle this case automatically.

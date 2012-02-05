@@ -14,10 +14,12 @@ set CWD=%~dp0
 
 cd %PYTHONHOME%
 
+
 %PYC% %UNLINK% .\Lib
-echo "directory precompiled - all *.py removed"> .\lib\_PRECOMPILED_.DIR
+@echo "*** ToDo: exclude (some of) Lib\site-packages\PIL, some *.py required"
 
 @rem todo: build library.zip
+echo "directory precompiled - all *.py removed"> .\lib\_PRECOMPILED_.DIR
 
 @cd %CWD%
 

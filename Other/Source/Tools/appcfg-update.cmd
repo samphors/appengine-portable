@@ -4,7 +4,8 @@
 
 @set APP_HOME=%~dp0
 @rem set GAEPY=\PortableApps\GAEPyPortable
-@set GAEPY=\PortableApps\AppEngine_Python
+@rem set GAEPY=\PortableApps\AppEngine_Python
+@set GAEPY=\PortableApps\AppEngine_Python25
 @set PYTHONHOME=%GAEPY%\App\python-2.5.4-gae
 
 @rem set PYTHONOPTIMIZE=1	# DONT_SET

@@ -11,7 +11,8 @@ set APP_ID=***SETME***
 set DB_FILE=%APP_ID%.dump.sql3
 
 @rem set GAEPY=\PortableApps\GAEPyPortable
-@set GAEPY=\PortableApps\AppEngine_Portable
+@rem set GAEPY=\PortableApps\AppEngine_Python
+@set GAEPY=\PortableApps\AppEngine_Python25
 @set PYTHONHOME=%GAEPY%\App\python-2.5.4-gae
 @set PYTHONNOUSERSITE=1
 

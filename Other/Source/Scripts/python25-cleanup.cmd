@@ -1,14 +1,12 @@
 @echo off
 @rem Clean out the package, intended to run before packaging
 @rem Script must be copied/moved into the application directory
-@rem GAEPyPortable: http://code.google.com/p/appengine-portable/
+@rem App Engine Portable: http://code.google.com/p/appengine-portable/
 
 set CWD=%~dp0
 set PYTHONHOME="%CWD%App\python-2.5.4-gae"
 
 cd %PTHONHOME%
-
-@rem if exist _PRECOMPILED_.DIR
 
 rmdir /S /Q .\Doc
 del .\DLLs\_ctypes_test.pyd
@@ -39,13 +37,16 @@ rmdir /S /Q .\Tools
 
 @rem del .\w9xpopen.exe
 
-del /S *.msi
-@rem del /S *.pyc
-del /S *.pyo
-del /S *.bak
-del /S *.tmp
-@rem del /S *.orig
+del /Q /F *.bak
+del /Q /F *.msi
+@rem del /Q /F *.orig
+del /Q /F *.tmp
 
+@rem if exist _PRECOMPILED_.DIR goto END
+@rem del /Q /F *.pyc
+del /Q /F *.pyo
+
+
+:END
 cd %CWD%
-
 pause

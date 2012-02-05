@@ -37,11 +37,11 @@ def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0, safe=0):
     unlink:    if 1, unlink *.py after compilation
 
     """
-    print 'Directory', dir
+    print 'Directory: %s' % (dir)
     try:
         names = os.listdir(dir)
     except os.error:
-        print "Can't list", dir
+        print 'Cant list: %s' % (dir)
         names = []
     names.sort()
     success = 1
@@ -63,7 +63,7 @@ def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0, safe=0):
                 except os.error:
                     ctime = 0
                 if (ctime < ftime) or force:
-                    print 'Compile:', fullname
+                    print 'Compile: %s' % (fullname)
                     try:
                         py_compile.compile(fullname, cfile, dfile)
                     except KeyboardInterrupt:
@@ -72,15 +72,20 @@ def compile_dir(dir, maxlevels=10, ddir=None, force=0, unlnk=0, safe=0):
                         if type(sys.exc_type) == type(''):
                             exc_type_name = sys.exc_type
                         else: exc_type_name = sys.exc_type.__name__
-                        print 'Sorry:', exc_type_name + ':',
-                        print sys.exc_value
+                        print 'Sorry: %s: %s' % (exc_type_name, sys.exc_value)
                         success = 0
                         continue
                     # set timestamp from sourcefile (ftime)
-                    os.utime(cfile, (ftime,ftime))
+                    try:
+                        os.utime(cfile, (ftime,ftime))
+                    #except WindowsError, e:
+                    #    print '*** ERROR: %s\nWindowsError: %s' % (cfile, e)
+                    except:
+                        print '*** ERROR set utime ***: %s' % (cfile)
+                        pass    # not serious
                 # safety: preserve __init__.py from deletion
                 if unlnk and ((not safe) or (name != '__init__.py')):
-                    print 'Unlink:', fullname
+                    print 'Unlink: %s' % (fullname)
                     os.unlink(fullname)
         elif maxlevels > 0 and \
              name != os.curdir and name != os.pardir and \
